@@ -55,5 +55,19 @@ describe('memory database', () => {
       { _id: id2, ...objectToSave2 }
     ]);
   });
+
+  it('returns updated object', () => {
+    const id = database1.create(objectToSave);
+    const updatedObject = {
+      name: 'george',
+      quantity: 1029
+    };
+    expect(database1.findByIdAndUpdate(id, updatedObject)).toEqual(
+      { _id: id,
+        name: 'george',
+        quantity: 1029
+      }
+    );
+  });
 });
 
