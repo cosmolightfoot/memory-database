@@ -15,18 +15,13 @@ describe('memory database', () => {
       name: 'guses',
       quantity: 1 
     };
-    // objectToSave3 = {
-    //   name: 'fishes',
-    //   quantity: 23 
-    // };
   });
 
   it('has store', () => {
     expect(database1.store).toEqual({});
   });
 
-  it('has an id', () => {
-    //call method "create" and pass an object as a value to a key named _id
+  it('returns an object by id', () => {
     const id = database1.create(objectToSave);
     expect(database1.store[id]).toEqual(
       { _id: id,
@@ -68,6 +63,21 @@ describe('memory database', () => {
         quantity: 1029
       }
     );
+  });
+
+  it('removes item from store by id', () => {
+    const id = database1.create(objectToSave);
+    database1.deleteById(id);
+    expect(database1.store).toEqual({});
+  });
+
+  it('empties store', () => {
+    /*eslint-disable*/
+    const id = database1.create(objectToSave);
+    const id2 = database1.create(objectToSave2);
+    /*eslint-enable*/
+    database1.dropStore();
+    expect(database1.store).toEqual({});
   });
 });
 
